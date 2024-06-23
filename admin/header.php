@@ -18,7 +18,7 @@
 	<!-- nav bar -->
 	<nav class="navbar navbar-expand-lg sticky-md-top shadow-sm" style="background-color: #FFD95A;">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="index.php" style="color: black;">
+			<a class="navbar-brand" href="admin_dashboard.php" style="color: black;">
 				<img src="https://www.logolynx.com/images/logolynx/2a/2ad00c896e94f1f42c33c5a71090ad5e.png" alt="Logo"
 				width="30" height="auto" class="d-inline-block align-text-top">
 				STA. MARIA DIAGNOSTIC AND IMAGING CENTER
