@@ -65,6 +65,31 @@
             margin-bottom: 20px;
         }
     </style>
+
+    <style>
+        .btn-custom {
+            width: 500px;
+            height: 70px;
+            font-size: 1.7em;
+            font-weight: bold;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            transition: all 0.3s ease;
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .btn-custom:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+        
+        .btn-custom:active {
+            background-color: #004085;
+            transform: scale(1);
+        }
+    </style>
 </head>
 
 <body>
@@ -98,10 +123,11 @@
 						<?php
 						if(isset($_SESSION['user_id'])) {
 							echo '<button id="btnLogout" type="button" class="btn btn-mydark me-2 mt-2 mb-2">Log-Out</button>';
-						} else {
-							echo '<button id="btnRegister" type="button" class="btn btn-mydark me-2 mt-2 mb-2">Register</button>';
-							echo '<button id="btnLogin" type="button" class="btn btn-mydark me-2 mt-2 mb-2">Log-In</button>';
-						}
+						} 
+						// else {
+						// 	echo '<button id="btnRegister" type="button" class="btn btn-mydark me-2 mt-2 mb-2">Register</button>';
+						// 	echo '<button id="btnLogin" type="button" class="btn btn-mydark me-2 mt-2 mb-2">Log-In</button>';
+						// }
 						?>
 					</div>
 				</div>

@@ -5,7 +5,7 @@ $active_profile = "";
 $active_your_appointments = "";
 $active_new_appointment = "";
 include_once('header.php');
-?>	
+?>  
 
 <body>
   <!-- nav bar -->
@@ -30,46 +30,87 @@ include_once('header.php');
           if(isset($_SESSION['user_id'])) {
             echo '<button id="btnNewAppointment" type="button" class="btn btn-primary btn-custom mt-2 mb-2" style="width: 500px; height: 70px; font-size: 1.7em; font-weight: bold;">New Appointment</button>';
           } else {
-            echo '<button id="btnLogin2" type="button" class="btn btn-primary mt-2 mb-2" style="width: 500px; height: 70px; font-size: 1.7em; font-weight: bold;">Login</button>
-            <button id="btnRegister2" type="button" class="btn btn-primary mt-2 mb-2" style="width: 500px; height: 70px; font-size: 1.7em; font-weight: bold;">Register</button>';
+            echo '
+            <button id="btnBookNow" type="button" class="btn-custom">Book Now</button>
+            <button id="btnSeeServices" type="button" class="btn-custom">See Services</button>
+            ';
           }
           ?>
         </div>
       </div>
     </div>
   </div>
-  <div style="text-align: center; margin-bottom: 60px; background-color: white">
+  <div style="text-align: center; margin-bottom: 60px; background-color: white;">
     <img src="https://cdn.discordapp.com/attachments/489358237343416320/1254446687850729512/step.png?ex=66798604&is=66783484&hm=9a73d53787e6a67ea08b03b820667b1c901ebc14c8456c9eb9eabc24e9db31e1&" alt="steps" style="width: 800px; height: auto; display: block; margin-left: auto; margin-right: auto;">
   </div>
+
+  <div class="about-us-container" style="display: flex;">
+    <div class="about-us" style="padding: 20px 60px 20px 40px; border-left: 8px solid #4c3d3d; flex-grow: 1; margin-right: auto;">
+      <h2 style="color: #333; font-size: 24px; margin-bottom: 30px; margin-left: 80px;">About Us</h2>
+      <p id="aboutUs" style="color: #666; font-size: 16px; line-height: 1.6; margin-left: 80px;">This is where you can put your information about your company or yourself. Feel free to include details about your history, mission, team, and anything else you'd like to share with your audience.</p>
+    </div>
+    <div class="about-us-image" style="padding: 20px; width: 900px;">
+      <img src="https://wallpaperaccess.com/full/1282798.jpg" style="max-width: 100%; height: auto;">
+    </div>
+  </div>
+
+
+
+
+
   <!-- end nav bar -->
-  <div class="my-wrapper" style="margin-bottom: 50px;">
+  <div class="my-wrapper" style="margin-bottom: 50px; margin-top: 50px;">
     <div class="container-fluid">
       <div class="row">
         <div class="col-12 text-center">
-          <h1 class="title" style="font-size: 35px; margin-bottom: 50px;">SERVICES OFFERED</h1>
-          <ul class="list-unstyled" style="font-size: 25px;"> <!-- Adjust font size as needed -->
-            <li>Service 1
-              <p>Description of Service 1</p>
-            </li>
-            <li>Service 2
-              <p>Description of Service 2</p>
-            </li>
-            <li>Service 3
-              <p>Description of Service 3</p>
-            </li>
-            <li>Service 4
-              <p>Description of Service 4</p>
-            </li>
-            <li>Service 5
-              <p>Description of Service 5</p>
-            </li>
-          </ul>
+          <section id="sectionService">
+            <h1 class="title" style="font-size: 35px; margin-bottom: 50px;">SERVICES OFFERED</h1>
+            <ul id="ourServices" class="list-unstyled" style="font-size: 25px;"> <!-- Adjust font size as needed -->
+              <li>Service 1
+                <p>Description of Service 1</p>
+              </li>
+              <li>Service 2
+                <p>Description of Service 2</p>
+              </li>
+              <li>Service 3
+                <p>Description of Service 3</p>
+              </li>
+              <li>Service 4
+                <p>Description of Service 4</p>
+              </li>
+              <li>Service 5
+                <p>Description of Service 5</p>
+              </li>
+            </ul>
+          </section>
         </div>
       </div>
     </div>
   </div>
 
 
+  <div style="background-color: white; margin-bottom: 50px; display: flex; height:150px;">
+    <div style="background-color: white; width: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+      <h1 style="font-size: 25px; margin: 10px;">Our Schedules</h1>
+      <p id="ourSchedules" style="font-size: 16px; margin: 10px; max-width: 70%;">vice monday 3pm - 4pm | service tuesday 4pm - 5pm | serv wednesday 5pm - 6pm | serv thursday & friday 6am - 9am</p>
+    </div>
+    <div style="background-color: gray; width: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+      <h1 style="font-size: 25px; margin: 0;">Our Experts</h1>
+      <p id="ourExperts" style="font-size: 16px; margin: 10px;">on god bro</p>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
 <?php
   include_once('footer.php');
-?>	
+?>  

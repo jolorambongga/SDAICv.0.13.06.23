@@ -29,11 +29,11 @@
 			window.location.href="login.php";
 		});
 
-		$('#btnRegister2').click(function () {
-			window.location.href="register.php";
+		$('#btnBookNow').click(function () {
+			window.location.href="new_appointment.php";
 		});
-		$('#btnLogin2').click(function() {
-			window.location.href="login.php";
+		$('#btnSeeServices').click(function() {
+			window.location.href="#sectionService";
 		});
 		$('#btnNewAppointment').click(function() {
 			window.location.href="new_appointment.php";

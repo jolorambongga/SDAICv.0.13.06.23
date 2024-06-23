@@ -83,10 +83,10 @@
 					</li>
 				</ul>
 
-				<!-- schedule -->
+				<!-- landing -->
 				<ul class="nav nav-tabs my_nav">
 					<li class="nav-item">
-						<a class="nav-link <?php echo $active_schedule ?>" href="schedule.php">Schedule</a>
+						<a class="nav-link <?php echo $active_landing ?>" href="landing.php">Landing</a>
 					</li>
 				</ul>
 
