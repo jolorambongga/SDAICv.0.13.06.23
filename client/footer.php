@@ -35,6 +35,9 @@
 		$('#btnLogin2').click(function() {
 			window.location.href="login.php";
 		});
+		$('#btnNewAppointment').click(function() {
+			window.location.href="new_appointment.php";
+		});
 	});
 </script>
 
