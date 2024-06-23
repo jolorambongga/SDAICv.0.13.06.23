@@ -8,6 +8,9 @@
 	<link rel='stylesheet' href='../includes/css/my_css.css'/>
 	<!-- <link rel='stylesheet' href='../includes/css/my_radio.css'/> -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 	<script src="https://cdn.jsdelivr.net/npm/bowser"></script>
 	<script src="../admin/script/log_script.js"></script>
 	<style>
@@ -49,6 +52,19 @@
 			cursor: pointer;
 		}
 	</style>
+
+	<style>
+        .user-icon-container {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 100px;
+            margin-left: 5px;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 
 <body>

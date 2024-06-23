@@ -15,6 +15,11 @@ checkAuth();
       <div class="col-4">
         <h1>Your profile</h1>
       </div>
+      <hr>
+      <div class="user-icon-container">
+        <i class="fas fa-user"></i>
+      </div>
+
     </div>
     <div id='profileBody'>
       ...
@@ -86,7 +91,6 @@ checkAuth();
           var data = response.data;
 
           const read_profile_html = `
-          <hr>
           <h5>Username: ${data.username}</h5>
           <h5>Email: ${data.email}</h5>
           <h5>Full Name: ${data.first_name} ${data.middle_name} ${data.last_name}</h5>
