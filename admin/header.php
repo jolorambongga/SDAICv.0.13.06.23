@@ -30,7 +30,7 @@
 	<!-- header -->
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-md-6 d-flex align-items-end" style="background-color: #C07F00;">
+			<div class="col-md-10 d-flex align-items-end" style="background-color: #C07F00;">
 
 				<!-- dash, profile, appointments, doctors, services, users, logs -->
 
@@ -83,9 +83,16 @@
 					</li>
 				</ul>
 
+				<!-- schedule -->
+				<ul class="nav nav-tabs my_nav">
+					<li class="nav-item">
+						<a class="nav-link <?php echo $active_schedule ?>" href="schedule.php">Schedule</a>
+					</li>
+				</ul>
+
 
 			</div>
-			<div class="col-md-6 d-flex justify-content-end" style="background-color: #C07F00;">
+			<div class="col-md-2 d-flex justify-content-end" style="background-color: #C07F00;">
 				<!-- IF SET CONDITION FOR BUTTONS -->
 				<button type="button" class="btn btn-mydark me-2 mt-2 mb-2">Log-Out</button>
 			</div>

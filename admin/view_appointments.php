@@ -1,5 +1,5 @@
 <?php
-$title = "Admin - View Appointments";
+$title = "Admin - Appointments";
 $active_appointments = "active";
 include_once "header.php";
 // echo date_default_timezone_get();

@@ -1,5 +1,5 @@
 <?php
-$title = 'Audit Logs';
+$title = 'Admin - Logs';
 $active_logs = 'active';
 include_once('header.php');
 ?>

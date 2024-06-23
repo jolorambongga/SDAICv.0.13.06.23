@@ -1,5 +1,5 @@
 <?php
-$title = 'Admin - Edit Doctors';
+$title = 'Admin - Doctors';
 $active_doctors = 'active';
 include_once('header.php');
 ?>
