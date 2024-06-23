@@ -109,47 +109,50 @@ include_once('header.php');
       loadLanding();
       loadServices();
       loadDoctors();
+
+
       function loadLanding() {
         $.ajax({
-          type: 'GET',
-          dataType: 'JSON',
-          url: 'handles/read_landing.php',
-          success: function(response) {
-            console.log("SUCCESS RESPONSE LANDING", response);
-            if (response.status === 'success' && response.data) {
-              var data = response.data;
+            type: 'GET',
+            dataType: 'JSON',
+            url: 'handles/read_landing.php',
+            success: function(response) {
+                console.log("SUCCESS RESPONSE LANDING", response);
+                if (response.status === 'success' && response.data) {
+                    var data = response.data;
 
-// Update background image
-              if (data.background_image) {
-                $('body').css('background-image', 'url(' + data.background_image + ')');
-              }
+                    // Update background image
+                    if (data.background_image) {
+                        $('body').css('background-image', 'url(' + data.background_image + ')');
+                    }
 
-// Update about_us content
-              $('#about_us').text(data.about_us);
+                    // Update about_us content
+                    $('#about_us').text(data.about_us);
 
-// Update about-us image
-              if (data.about_us_image) {
-                var about_us_image_html = '<img src="' + data.about_us_image + '" alt="About Us Image">';
-                $('.about-us-image').html(about_us_image_html);
-              }
+                    // Update about-us image
+                    if (data.about_us_image) {
+                        var about_us_image_html = '<img src="' + data.about_us_image + '" alt="About Us Image"  style="max-width: 100%; height: auto;">';
+                        $('.about-us-image').html(about_us_image_html);
+                    }
 
-// Update clinic hours if available
-              if (data.avail_day && data.avail_start_time && data.avail_end_time) {
-                var clinic_hours_html = '<p>Availability: ' + data.avail_day + ' ' + data.avail_start_time + ' - ' + data.avail_end_time + '</p>';
-                $('#clinic_hours').html(clinic_hours_html);
-              }
-            } else {
-// Handle empty or error response
-              $('#about_us').text('No data available.');
-$('.about-us-image').empty(); // Clear about-us image if no data
-$('#clinic_hours').empty(); // Clear clinic hours if no data
-}
-},
-error: function(error) {
-  console.log("ERROR LOADING LANDING", error);
-}
-});
+                    // Update clinic hours if available
+                    if (data.avail_day && data.avail_start_time && data.avail_end_time) {
+                        var clinic_hours_html = '<p>Availability: ' + data.avail_day + ' ' + data.avail_start_time + ' - ' + data.avail_end_time + '</p>';
+                        $('#clinic_hours').html(clinic_hours_html);
+                    }
+                } else {
+                    // Handle empty or error response
+                    $('#about_us').text('No data available.');
+                    $('.about-us-image').empty(); // Clear about-us image if no data
+                    $('#clinic_hours').empty(); // Clear clinic hours if no data
+                }
+            },
+            error: function(error) {
+                console.log("ERROR LOADING LANDING", error);
+            }
+        });
       }
+
       function loadServices() {
         $.ajax({
           type: 'GET',

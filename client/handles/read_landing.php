@@ -12,24 +12,20 @@ try {
     $stmt->bindParam(':landing_id', $landing_id, PDO::PARAM_INT);
     $stmt->execute();
     
-    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $data = $stmt->fetch(PDO::FETCH_ASSOC); // Assuming only one record is returned
 
-    foreach ($data as &$row) {
-        // Check if about_us_image is a URL or binary data
-        if (filter_var($row['about_us_image'], FILTER_VALIDATE_URL)) {
-            // It's already a URL, do nothing
-        } else {
-            // Convert binary data to base64 and prepend data URI
-            $row['about_us_image'] = 'data:image/png;base64,' . base64_encode($row['about_us_image']);
-        }
+    if (!$data) {
+        echo json_encode(array("status" => "error", "message" => "No data found for landing_id: $landing_id", "process" => "read landing"));
+        exit;
+    }
 
-        // Check if main_image is a URL or binary data
-        if (filter_var($row['main_image'], FILTER_VALIDATE_URL)) {
-            // It's already a URL, do nothing
-        } else {
-            // Convert binary data to base64 and prepend data URI
-            $row['main_image'] = 'data:image/png;base64,' . base64_encode($row['main_image']);
-        }
+    // Check and convert images to base64 data URI if needed
+    if ($data['about_us_image'] && !filter_var($data['about_us_image'], FILTER_VALIDATE_URL)) {
+        $data['about_us_image'] = 'data:image/png;base64,' . base64_encode($data['about_us_image']);
+    }
+
+    if ($data['main_image'] && !filter_var($data['main_image'], FILTER_VALIDATE_URL)) {
+        $data['main_image'] = 'data:image/png;base64,' . base64_encode($data['main_image']);
     }
     
     header('Content-Type: application/json');
