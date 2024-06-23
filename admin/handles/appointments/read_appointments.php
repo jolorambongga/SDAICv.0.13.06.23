@@ -35,31 +35,32 @@ try {
             JOIN tbl_Services as s ON a.service_id = s.service_id
             LEFT JOIN tbl_Users as u ON a.user_id = u.user_id";
 
+    // Initialize where clause array and bind params array
+    $whereClauses = [];
+    $bindParams = [];
+
     // Filter by service_id if not 'All'
     if ($service_id !== 'All') {
-        $sql .= " WHERE a.service_id = :service_id";
+        $whereClauses[] = "a.service_id = :service_id";
+        $bindParams['service_id'] = $service_id;
     }
 
     // Additional filter for today's appointments
     if ($today) {
-        if ($service_id === 'All') {
-            $sql .= " WHERE";
-        } else {
-            $sql .= " AND";
-        }
-        $sql .= " DATE(CONVERT_TZ(a.appointment_date, '+00:00', '+08:00')) = :current_date";
+        $whereClauses[] = "a.appointment_date = :current_date";
+        $bindParams['current_date'] = $current_date;
+    }
+
+    // Construct the WHERE clause
+    if (!empty($whereClauses)) {
+        $sql .= " WHERE " . implode(" AND ", $whereClauses);
     }
 
     $stmt = $pdo->prepare($sql);
 
-    // Bind service_id parameter if not 'All'
-    if ($service_id !== 'All') {
-        $stmt->bindParam(':service_id', $service_id, PDO::PARAM_STR);
-    }
-
-    // Bind current_date parameter for today's filter
-    if ($today) {
-        $stmt->bindParam(':current_date', $current_date, PDO::PARAM_STR);
+    // Bind parameters
+    foreach ($bindParams as $paramName => $paramValue) {
+        $stmt->bindParam(':' . $paramName, $paramValue, PDO::PARAM_STR);
     }
 
     $stmt->execute();
@@ -75,7 +76,7 @@ try {
 
     // Send JSON response
     header('Content-Type: application/json');
-    echo json_encode(array("status" => "success", "process" => "read appointments", "data" => $appointments));
+    echo json_encode(array("status" => "success", "process" => "read appointments", "data" => $appointments, "today" => $today, "service" => $service_id, "current date" => $current_date));
 
 } catch (PDOException $e) {
     // Handle PDO exceptions

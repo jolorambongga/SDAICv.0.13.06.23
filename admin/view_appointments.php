@@ -119,6 +119,7 @@ include_once "header.php";
         </div>
       </div>
       <!-- end reject modal -->
+      <input type="hidden" id="activeServiceId" value="All">
     </div>
   </div>
 
@@ -143,8 +144,14 @@ include_once "header.php";
               event.preventDefault();
               $(this).tab('show');
               var service_id = $(this).data('service-id');
-              loadFilteredAppointments(service_id);
-              console.log(service_id);
+              $('#activeServiceId').val(service_id);
+
+              // event.preventDefault();
+              // $(this).tab('show');
+              var activeServiceId = $('#activeServiceId').val();
+              var todayChecked = $('#cbxToday').is(':checked');
+              loadFilteredAppointments(activeServiceId, todayChecked);
+              console.log('nav link', activeServiceId, todayChecked);
             });
           },
           error: function(error) {
@@ -154,115 +161,119 @@ include_once "header.php";
       }
 
       // Function to load initial appointments
-    function loadInitialAppointments() {
-        var activeServiceId = $('.nav-link.active').data('service-id');
+      function loadInitialAppointments() {
+        var activeServiceId = $('#activeServiceId').val();
         var todayChecked = $('#cbxToday').is(':checked');
         loadFilteredAppointments(activeServiceId, todayChecked);
-    }
+      }
 
     // Function to load appointments based on service_id and today flag
-    function loadFilteredAppointments(service_id, today) {
+      function loadFilteredAppointments(service_id, today) {
         var url = 'handles/appointments/read_appointments.php';
+        // var service_id = $('#activeServiceId').val();
         var data = { service_id: service_id };
         if (today) {
-            data.today = 'true';
+          data.today = 'true';
+          console.log('filtered function', service_id, today);
         }
 
         $.ajax({
-            type: 'GET',
-            url: url,
-            dataType: 'json',
-            data: data,
-            success: function(response) {
-                console.log(response);
-                $('#tbodyAppointments').empty();
-                response.data.forEach(function(data) {
-                    let statusColor = getStatusColor(data.status);
-                    let completedColor = getCompletedColor(data.completed);
-                    const isChecked = data.completed === 'YES' ? 'checked' : '';
-                    const read_appointments_html = `
-                        <tr>
-                            <th scope="row"><small>${data.appointment_id}</small></th>
-                            <td><small>${data.first_name} ${data.last_name}</small></td>
-                            <td><small>${data.service_name}</small></td>
-                            <td><small>${data.formatted_date}</small></td>
-                            <td><small>${data.formatted_time}</small></td>
-                            <td data-appointment-id='${data.appointment_id}'>
-                                <button id='callReqImg' type='button' class='btn btn-warning btn-sm' data-bs-toggle='modal' data-bs-target='#mod_ReqImg'>View Image</button>
-                            </td>
-                            <td style='color: ${statusColor};'><small>${data.status}</small></td>
-                            <td data-appointment-id='${data.appointment_id}' style='color: ${completedColor};'>
-                                <small class="completed-text">${data.completed}</small>
-                                <input type="checkbox" class="cbxCompleted" data-completed-yes="YES" data-completed-no="NO" ${isChecked} />
-                            </td>
-                            <td data-appointment-id='${data.appointment_id}' data-full-name="${data.first_name} ${data.last_name}" data-appointment-name="${data.service_name}">
-                                <div class="d-grid gap-2 d-md-flex justify-content-md-end text-center">
-                                    <button id='callReject' data-bs-toggle="modal" data-bs-target="#mod_Reject" type='button' class='btn btn-danger btn-sm'>
-                                        <i class="fas fa-thumbs-down"></i>
-                                    </button>
-                                    <button id='callApprove' data-bs-toggle="modal" data-bs-target="#mod_Approve" type='button' class='btn btn-success btn-sm'>
-                                        <i class="fas fa-thumbs-up"></i>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                    `;
-                    $('#tbodyAppointments').append(read_appointments_html);
-                });
-            },
-            error: function(error) {
-                console.log("ERROR", error);
-            }
+          type: 'GET',
+          url: url,
+          dataType: 'json',
+          data: data,
+          success: function(response) {
+            console.log(response);
+            $('#tbodyAppointments').empty();
+            response.data.forEach(function(data) {
+              let statusColor = getStatusColor(data.status);
+              let completedColor = getCompletedColor(data.completed);
+              const isChecked = data.completed === 'YES' ? 'checked' : '';
+              const read_appointments_html = `
+              <tr>
+              <th scope="row"><small>${data.appointment_id}</small></th>
+              <td><small>${data.first_name} ${data.last_name}</small></td>
+              <td><small>${data.service_name}</small></td>
+              <td><small>${data.formatted_date}</small></td>
+              <td><small>${data.formatted_time}</small></td>
+              <td data-appointment-id='${data.appointment_id}'>
+              <button id='callReqImg' type='button' class='btn btn-warning btn-sm' data-bs-toggle='modal' data-bs-target='#mod_ReqImg'>View Image</button>
+              </td>
+              <td style='color: ${statusColor};'><small>${data.status}</small></td>
+              <td data-appointment-id='${data.appointment_id}' style='color: ${completedColor};'>
+              <small class="completed-text">${data.completed}</small>
+              <input type="checkbox" class="cbxCompleted" data-completed-yes="YES" data-completed-no="NO" ${isChecked} />
+              </td>
+              <td data-appointment-id='${data.appointment_id}' data-full-name="${data.first_name} ${data.last_name}" data-appointment-name="${data.service_name}">
+              <div class="d-grid gap-2 d-md-flex justify-content-md-end text-center">
+              <button id='callReject' data-bs-toggle="modal" data-bs-target="#mod_Reject" type='button' class='btn btn-danger btn-sm'>
+              <i class="fas fa-thumbs-down"></i>
+              </button>
+              <button id='callApprove' data-bs-toggle="modal" data-bs-target="#mod_Approve" type='button' class='btn btn-success btn-sm'>
+              <i class="fas fa-thumbs-up"></i>
+              </button>
+              </div>
+              </td>
+              </tr>
+              `;
+              $('#tbodyAppointments').append(read_appointments_html);
+            });
+          },
+          error: function(error) {
+            console.log("ERROR", error);
+          }
         });
-    }
+      }
 
     // Event handler for tab selection
-    $('#my_nav a').on('click', function(event) {
-        event.preventDefault();
-        $(this).tab('show');
-        var service_id = $(this).data('service-id');
-        var todayChecked = $('#cbxToday').is(':checked');
-        loadFilteredAppointments(service_id, todayChecked);
-    });
+    // $('#my_nav a').on('click', function(event) {
+    //     event.preventDefault();
+    //     $(this).tab('show');
+    //     var service_id = $('#activeServiceId').val();
+    //     var todayChecked = $('#cbxToday').is(':checked');
+    //     loadFilteredAppointments(service_id, todayChecked);
+    //     console.log('nav link', service_id, todayChecked);
+    // });
+
+      loadInitialAppointments();
 
     // Event handler for checkbox change
-    $('#cbxToday').change(function() {
-        var activeServiceId = $('.nav-link.active').data('service-id');
+      $('#cbxToday').change(function() {
+        var activeServiceId = $('#activeServiceId').val();
         var todayChecked = $(this).is(':checked');
         loadFilteredAppointments(activeServiceId, todayChecked);
-    });
+        console.log('checkbox changed', activeServiceId, todayChecked);
+      });
 
-    // Initial load of appointments
-    loadInitialAppointments();
 
     // Helper functions for status and completed colors
-    function getStatusColor(status) {
+      function getStatusColor(status) {
         switch (status) {
-            case 'PENDING':
-                return '#3399ff';
-            case 'CANCELLED':
-                return '#ff9900';
-            case 'REJECTED':
-                return '#ff0000';
-            case 'APPROVED':
-                return '#009933';
-            case 'undefined':
-                return '#FFC0CB';
-            default:
-                return '#000000';
+        case 'PENDING':
+          return '#3399ff';
+        case 'CANCELLED':
+          return '#ff9900';
+        case 'REJECTED':
+          return '#ff0000';
+        case 'APPROVED':
+          return '#009933';
+        case 'undefined':
+          return '#FFC0CB';
+        default:
+          return '#000000';
         }
-    }
+      }
 
-    function getCompletedColor(completed) {
+      function getCompletedColor(completed) {
         switch (completed) {
-            case 'NO':
-                return '#ff0000';
-            case 'YES':
-                return '#009933';
-            default:
-                return '#000000';
+        case 'NO':
+          return '#ff0000';
+        case 'YES':
+          return '#009933';
+        default:
+          return '#000000';
         }
-    }
+      }
 
       // GET IMAGE
       $('#tbodyAppointments').on('click', '#callReqImg', function() {
