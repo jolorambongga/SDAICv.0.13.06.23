@@ -105,7 +105,7 @@ include_once('header.php');
 
   <script type="text/javascript">
     $(document).ready(function() {
-    // READ INDEX INFO
+// READ INDEX INFO
       loadLanding();
       loadServices();
       loadDoctors();
@@ -116,40 +116,39 @@ include_once('header.php');
           url: 'handles/read_landing.php',
           success: function(response) {
             console.log("SUCCESS RESPONSE LANDING", response);
-            if (response.status === 'success' && response.data.length > 0) {
-              var data = response.data[0]; // Assuming only one record is returned
-              
-              // Append about_us to the element with id 'about_us'
-              $('#about_us').empty().append(data.about_us);
+            if (response.status === 'success' && response.data) {
+              var data = response.data;
 
-              // Assuming you want to display images (if available)
+// Update background image
+              if (data.background_image) {
+                $('body').css('background-image', 'url(' + data.background_image + ')');
+              }
+
+// Update about_us content
+              $('#about_us').text(data.about_us);
+
+// Update about-us image
               if (data.about_us_image) {
-                var about_us_image_html = `<img src="${data.about_us_image}" alt="About Us Image">`;
-                $('#about_us_image').empty().append(about_us_image_html);
+                var about_us_image_html = '<img src="' + data.about_us_image + '" alt="About Us Image">';
+                $('.about-us-image').html(about_us_image_html);
               }
 
-              if (data.main_image) {
-                var main_image_html = `<img src="${data.main_image}" alt="Main Image">`;
-                $('#main_image').empty().append(main_image_html);
-              }
-
-              // Assuming you want to display clinic hours (if available)
+// Update clinic hours if available
               if (data.avail_day && data.avail_start_time && data.avail_end_time) {
-                var clinic_hours_html = `<p>Availability: ${data.avail_day} ${data.avail_start_time} - ${data.avail_end_time}</p>`;
-                $('#clinic_hours').empty().append(clinic_hours_html);
+                var clinic_hours_html = '<p>Availability: ' + data.avail_day + ' ' + data.avail_start_time + ' - ' + data.avail_end_time + '</p>';
+                $('#clinic_hours').html(clinic_hours_html);
               }
-          } else {
-              // Handle empty or error response
-            $('#about_us').empty().append('No data available.');
-            $('#about_us_image').empty();
-            $('#main_image').empty();
-            $('#clinic_hours').empty();
-          }
-        },
-        error: function(error) {
-          console.log("ERROR LOADING LANDING", error);
-        }
-      });
+            } else {
+// Handle empty or error response
+              $('#about_us').text('No data available.');
+$('.about-us-image').empty(); // Clear about-us image if no data
+$('#clinic_hours').empty(); // Clear clinic hours if no data
+}
+},
+error: function(error) {
+  console.log("ERROR LOADING LANDING", error);
+}
+});
       }
       function loadServices() {
         $.ajax({

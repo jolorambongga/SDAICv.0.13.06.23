@@ -177,6 +177,7 @@ include_once('header.php');
           success: function(response) {
             console.log("SAVE LANDING RESPONSE", response);
             // Handle success response
+            
           },
           error: function(error) {
             console.log("ERROR LANDING RESPONSE", error);
