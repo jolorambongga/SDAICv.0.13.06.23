@@ -19,7 +19,7 @@ checkAuth();
     <!-- add button -->
     <div class="row">
       <div class="col-12">
-        <button id="btnAddNewAppointment" type="button" class="btn btn-primary btn-sm mt-3 mb-3 float-end">ADD NEW APPOINTMENT</button>
+        <button id="btnAddNewAppointment" type="button" class="btn btn-mydark btn-sm mt-3 mb-3 float-end">ADD NEW APPOINTMENT</button>
       </div>
     </div>
     <!-- end button -->

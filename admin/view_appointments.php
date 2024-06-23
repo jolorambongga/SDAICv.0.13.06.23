@@ -2,6 +2,7 @@
 $title = "Admin - View Appointments";
 $active_appointments = "active";
 include_once "header.php";
+// echo date_default_timezone_get();
 ?>
 
 <body>
@@ -16,12 +17,12 @@ include_once "header.php";
       <!-- add button -->
       <div class="row">
         <div class="col-12">
-          <button type="button" class="btn btn-mydark mt-3 mb-3 float-end btn-sm">IDK YET</button>
+          <!-- <button type="button" class="btn btn-mydark mt-3 mb-3 float-end btn-sm">IDK YET</button> -->
         </div>
       </div>
       <div class="row bg-">
         <div class="col-10 bg-">
-          
+
         </div>
         <div class="col-2 text-end">          
           <strong>For Today</strong>
@@ -123,6 +124,17 @@ include_once "header.php";
 
   <script>
     $(document).ready(function() {
+
+      $('#cbxToday').change(function() {
+        var checked = $(this).is(':checked');
+        var service_id = $('.nav-link.active').data('service-id');
+
+        if (checked) {
+          loadFilteredAppointments(service_id, true);
+        } else {
+          loadFilteredAppointments(service_id, false);
+        }
+      });
       // loadAppointments();
       loadFilters();
       function loadFilters() {
@@ -235,10 +247,7 @@ include_once "header.php";
           return '#000000';
         }
       }
-
-
-
-// GET IMAGE
+      // GET IMAGE
       $('#tbodyAppointments').on('click', '#callReqImg', function() {
         var appointment_id = $(this).closest("td").data('appointment-id');
         console.log("console click", appointment_id);
