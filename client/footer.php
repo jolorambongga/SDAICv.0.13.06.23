@@ -28,6 +28,13 @@
 		$('#btnLogin').click(function() {
 			window.location.href="login.php";
 		});
+
+		$('#btnRegister2').click(function () {
+			window.location.href="register.php";
+		});
+		$('#btnLogin2').click(function() {
+			window.location.href="login.php";
+		});
 	});
 </script>
 
