@@ -2,6 +2,12 @@
 require_once('../../../includes/config.php');
 
 try {
+    // Check if PDO connection is successfully established in config.php
+    if (!isset($pdo)) {
+        throw new PDOException("PDO connection is not set.");
+    }
+
+    // Set PDO attributes for error handling
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     // Fetch the service_id and today filter from GET request
@@ -36,7 +42,12 @@ try {
 
     // Additional filter for today's appointments
     if ($today) {
-        $sql .= " AND DATE(CONVERT_TZ(a.appointment_date, '+00:00', '+08:00')) = :current_date";
+        if ($service_id === 'All') {
+            $sql .= " WHERE";
+        } else {
+            $sql .= " AND";
+        }
+        $sql .= " DATE(CONVERT_TZ(a.appointment_date, '+00:00', '+08:00')) = :current_date";
     }
 
     $stmt = $pdo->prepare($sql);
@@ -62,10 +73,12 @@ try {
         }
     }
 
+    // Send JSON response
     header('Content-Type: application/json');
     echo json_encode(array("status" => "success", "process" => "read appointments", "data" => $appointments));
 
 } catch (PDOException $e) {
+    // Handle PDO exceptions
     echo json_encode(array("status" => "error", "message" => $e->getMessage(), "process" => "read appointments"));
 }
 ?>
