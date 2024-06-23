@@ -6,13 +6,7 @@ try {
 
     $landing_id = 1; // Replace with your actual landing_id or retrieve dynamically
 
-    $sql = "SELECT l.*, 
-                   c.avail_day, 
-                   TIME_FORMAT(c.avail_start_time, '%h:%i %p') as avail_start_time, 
-                   TIME_FORMAT(c.avail_end_time, '%h:%i %p') as avail_end_time
-            FROM tbl_Landing AS l
-            LEFT JOIN tbl_ClinicHours AS c ON l.landing_id = c.landing_id
-            WHERE l.landing_id = :landing_id";
+    $sql = "SELECT * FROM tbl_Landing WHERE landing_id = :landing_id;";
 
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':landing_id', $landing_id, PDO::PARAM_INT);
