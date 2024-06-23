@@ -21,8 +21,9 @@
 						var user_id = <?php echo isset($_SESSION['user_id']) ? json_encode($_SESSION['user_id']) : 'null'; ?>;
 						var category = "USER";
 						var action = "LOG OUT";
-						var affected_data = "NONE";
+						var affected_data = "NONEsss";
 						logAction(user_id, category, action, affected_data);
+						window.location.href='index.php';
 					} else {
 						console.error("Logout failed:", response.message);
 					}

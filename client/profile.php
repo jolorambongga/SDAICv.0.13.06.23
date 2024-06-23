@@ -17,7 +17,7 @@ checkAuth();
       </div>
       <hr>
       <div class="user-icon-container">
-        <i class="fas fa-user"></i>
+        <i class="fas fa-user" style="color: #4C3D3D;"></i>
       </div>
 
     </div>
