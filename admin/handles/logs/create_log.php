@@ -13,15 +13,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $device = isset($_POST['device']) ? $_POST['device'] : null;
     $browser = isset($_POST['browser']) ? $_POST['browser'] : null;
     $ip_address = isset($_POST['ip_address']) ? $_POST['ip_address'] : null;
-    $time_stamp = isset($_POST['time_stamp']) ? $_POST['time_stamp'] : date('Y-m-d H:i:s');
+    // $time_stamp = isset($_POST['time_stamp']) ? $_POST['time_stamp'] : date('Y-m-d H:i:s');
 
     try {
         // Establish database connection
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         // Prepare SQL statement
-        $sql = "INSERT INTO tbl_Logs (user_id, category, action, affected_data, latitude, longitude, location, device, browser, ip_address, time_stamp)
-                VALUES (:user_id, :category, :action, :affected_data, :latitude, :longitude, :location, :device, :browser, :ip_address, :time_stamp)";
+        $sql = "INSERT INTO tbl_Logs (user_id, category, action, affected_data, latitude, longitude, location, device, browser, ip_address)
+                VALUES (:user_id, :category, :action, :affected_data, :latitude, :longitude, :location, :device, :browser, :ip_address)";
         
         $stmt = $pdo->prepare($sql);
         
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bindParam(':device', $device, PDO::PARAM_STR);
         $stmt->bindParam(':browser', $browser, PDO::PARAM_STR);
         $stmt->bindParam(':ip_address', $ip_address, PDO::PARAM_STR);
-        $stmt->bindParam(':time_stamp', $time_stamp, PDO::PARAM_STR);
+        // $stmt->bindParam(':time_stamp', $time_stamp, PDO::PARAM_STR);
         
         // Execute SQL statement
         $stmt->execute();

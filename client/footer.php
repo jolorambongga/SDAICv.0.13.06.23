@@ -54,7 +54,7 @@
 						console.log(response);
 						var user_id = <?php echo isset($_SESSION['user_id']) ? json_encode($_SESSION['user_id']) : 'null'; ?>;
 						var category = "USER";
-						var action = "LOG OUT";
+						var action = "LOG OUT FOOTER ONLY";
 						var affected_data = "NONE";
 						logAction(user_id, category, action, affected_data);
 						window.location.href='index.php';
