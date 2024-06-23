@@ -108,4 +108,13 @@ CREATE TABLE IF NOT EXISTS tbl_AppointmentHistory (
     FOREIGN KEY (appointment_id) REFERENCES tbl_Appointments(appointment_id) ON DELETE CASCADE
 );
 
+CREATE TABLE IF NOT EXISTS tbl_Landing (
+    avail_day VARCHAR(20) NOT NULL,
+    avail_start_time TIME NOT NULL,
+    avail_end_time TIME NOT NULL,
+    about_us TEXT,
+    about_us_image LONGBLOB,
+    main_image LONGBLOB
+);
+
 INSERT INTO `tbl_roles` (`role_id`, `role_name`) VALUES ('1', 'admin'), ('2', 'user')
