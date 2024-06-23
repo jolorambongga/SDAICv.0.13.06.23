@@ -34,13 +34,26 @@ try {
             $_SESSION['first_name'] = $user['first_name'];
             $_SESSION['middle_name'] = $user['middle_name'];
             $_SESSION['last_name'] = $user['last_name'];
+            $_SESSION['role_id'] = $user['role_id'];
 
-            // Return success message and user data
-            echo json_encode(array(
-                "message" => "Login successful. Welcome, " . $user['first_name'] . " " . $user['last_name'],
-                "status" => "success",
-                "data" => $user
-            ));
+            // Check user role and redirect accordingly
+            if ($user['role_id'] == 1) {
+                // Admin role
+                echo json_encode(array(
+                    "message" => "Admin login successful. Welcome, " . $user['first_name'] . " " . $user['last_name'],
+                    "status" => "success",
+                    "data" => $user,
+                    "redirect" => "admin_dashboard.php"
+                ));
+            } else {
+                // User role
+                echo json_encode(array(
+                    "message" => "User login successful. Welcome, " . $user['first_name'] . " " . $user['last_name'],
+                    "status" => "success",
+                    "data" => $user,
+                    "redirect" => "user_dashboard.php"
+                ));
+            }
         } else {
             // Password incorrect
             echo json_encode(array("message" => "Wrong email/username or password!", "status" => "error", "isWrong" => "true"));

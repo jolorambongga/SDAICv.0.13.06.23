@@ -22,12 +22,12 @@
 
 <script>
 	$(document).ready(function () {
-		$('#btnRegister').click(function () {
-			window.location.href="register.php";
-		});
-		$('#btnLogin').click(function() {
-			window.location.href="login.php";
-		});
+		// $('#btnRegister').click(function () {
+		// 	window.location.href="register.php";
+		// });
+		// $('#btnLogin').click(function() {
+		// 	window.location.href="login.php";
+		// });
 
 		$('#btnBookNow').click(function () {
 			window.location.href="new_appointment.php";

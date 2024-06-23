@@ -70,6 +70,9 @@ checkLoggedIn();
         }
       });
     });
+    $('#btnLogin').click(function() {
+      window.location.href="new_appointment.php";
+    });
   });
 </script>
 
