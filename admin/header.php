@@ -90,6 +90,13 @@
 					</li>
 				</ul>
 
+				<!-- queue -->
+				<ul class="nav nav-tabs my_nav">
+					<li class="nav-item">
+						<a class="nav-link <?php echo $active_queue ?>" href="queue.php">Queue</a>
+					</li>
+				</ul>
+
 
 			</div>
 			<div class="col-md-2 d-flex justify-content-end" style="background-color: #C07F00;">
