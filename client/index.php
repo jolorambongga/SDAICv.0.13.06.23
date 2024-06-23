@@ -47,7 +47,7 @@ include_once('header.php');
   <div class="about-us-container" style="display: flex;">
     <div class="about-us" style="padding: 20px 60px 20px 40px; border-left: 8px solid #4c3d3d; flex-grow: 1; margin-right: auto;">
       <h2 style="color: #333; font-size: 24px; margin-bottom: 30px; margin-left: 80px;">About Us</h2>
-      <p id="aboutUs" style="color: #666; font-size: 16px; line-height: 1.6; margin-left: 80px;">This is where you can put your information about your company or yourself. Feel free to include details about your history, mission, team, and anything else you'd like to share with your audience.</p>
+      <p id="about_us" style="color: #666; font-size: 16px; line-height: 1.6; margin-left: 80px;">This is where you can put your information about your company or yourself. Feel free to include details about your history, mission, team, and anything else you'd like to share with your audience.</p>
     </div>
     <div class="about-us-image" style="padding: 20px; width: 900px;">
       <img src="https://wallpaperaccess.com/full/1282798.jpg" style="max-width: 100%; height: auto;">
@@ -103,6 +103,82 @@ include_once('header.php');
 
 
 
+  <script type="text/javascript">
+    $(document).ready(function() {
+    // READ INDEX INFO
+      loadLanding();
+      loadServices();
+      loadDoctors();
+      function loadLanding() {
+        $.ajax({
+          type: 'GET',
+          dataType: 'JSON',
+          url: 'handles/read_landing.php',
+          success: function(response) {
+            console.log("SUCCESS RESPONSE LANDING", response);
+            if (response.status === 'success' && response.data.length > 0) {
+              var data = response.data[0]; // Assuming only one record is returned
+              
+              // Append about_us to the element with id 'about_us'
+              $('#about_us').empty().append(data.about_us);
+
+              // Assuming you want to display images (if available)
+              if (data.about_us_image) {
+                var about_us_image_html = `<img src="${data.about_us_image}" alt="About Us Image">`;
+                $('#about_us_image').empty().append(about_us_image_html);
+              }
+
+              if (data.main_image) {
+                var main_image_html = `<img src="${data.main_image}" alt="Main Image">`;
+                $('#main_image').empty().append(main_image_html);
+              }
+
+              // Assuming you want to display clinic hours (if available)
+              if (data.avail_day && data.avail_start_time && data.avail_end_time) {
+                var clinic_hours_html = `<p>Availability: ${data.avail_day} ${data.avail_start_time} - ${data.avail_end_time}</p>`;
+                $('#clinic_hours').empty().append(clinic_hours_html);
+              }
+          } else {
+              // Handle empty or error response
+            $('#about_us').empty().append('No data available.');
+            $('#about_us_image').empty();
+            $('#main_image').empty();
+            $('#clinic_hours').empty();
+          }
+        },
+        error: function(error) {
+          console.log("ERROR LOADING LANDING", error);
+        }
+      });
+      }
+      function loadServices() {
+        $.ajax({
+          type: 'GET',
+          dataType: 'JSON',
+          url: '../admin/handles/services/read_services.php',
+          success: function(response) {
+            console.log("SUCCESS RESPONSE SERVICE", response);
+          },
+          error: function(error) {
+            console.log("ERROR LOADING SERVICE", error);
+          }
+        });
+      }
+      function loadDoctors() {
+        $.ajax({
+          type: 'GET',
+          dataType: 'JSON',
+          url: '../admin/handles/doctors/read_doctors.php',
+          success: function(response) {
+            console.log("SUCCESS RESPONSE DOCTORS", response);
+          },
+          error: function(error) {
+            console.log("ERROR LOADING DOCTORS", error);
+          }
+        });
+      }
+    });
+  </script>
 
 
 
@@ -110,7 +186,6 @@ include_once('header.php');
 
 
 
-
-<?php
+  <?php
   include_once('footer.php');
 ?>  

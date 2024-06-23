@@ -5,10 +5,7 @@ require_once('../../../includes/config.php');
 try {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $first_name = $_POST['first_name'];
-    $middle_name = $_POST['middle_name'];
-    $last_name = $_POST['last_name'];
-    $contact = $_POST['contact'];
+    $landing_id = 1;
     
 
     $sql = "UPDATE tbl_Landing 

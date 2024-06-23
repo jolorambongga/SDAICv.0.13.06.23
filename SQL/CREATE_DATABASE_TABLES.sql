@@ -115,30 +115,28 @@ CREATE TABLE IF NOT EXISTS tbl_Landing (
     main_image LONGBLOB
 );
 
-CREATE TABLE IF NOT EXISTS tbl_ClinicHours (
-    clinic_hours_id INT AUTO_INCREMENT PRIMARY KEY,
-    landing_id INT,
-    avail_day VARCHAR(20) NOT NULL,
-    avail_start_time TIME NOT NULL,
-    avail_end_time TIME NOT NULL,
-    FOREIGN KEY (landing_id) REFERENCES tbl_Landing(landing_id) ON DELETE CASCADE
-);
+-- CREATE TABLE IF NOT EXISTS tbl_ClinicHours (
+--     clinic_hours_id INT AUTO_INCREMENT PRIMARY KEY,
+--     landing_id INT,
+--     avail_day VARCHAR(20) NOT NULL,
+--     avail_start_time TIME NOT NULL,
+--     avail_end_time TIME NOT NULL,
+--     FOREIGN KEY (landing_id) REFERENCES tbl_Landing(landing_id) ON DELETE CASCADE
+-- );
+
+-- -- Assuming landing_id of 1 was automatically assigned due to AUTO_INCREMENT
+
+-- -- Insert dummy data into tbl_ClinicHours referencing tbl_Landing
+-- INSERT INTO tbl_ClinicHours (landing_id, avail_day, avail_start_time, avail_end_time)
+-- VALUES
+-- (1, 'Monday', '08:00:00', '17:00:00'),
+-- (1, 'Tuesday', '08:00:00', '17:00:00'),
+-- (1, 'Wednesday', '08:00:00', '17:00:00'),
+-- (1, 'Thursday', '08:00:00', '17:00:00'),
+-- (1, 'Friday', '08:00:00', '17:00:00');
 
 -- Insert dummy data into tbl_Landing
 INSERT INTO tbl_Landing (about_us, about_us_image, main_image)
 VALUES ('Welcome to our clinic!', 'https://wallpaperaccess.com/full/1282798.jpg', 'https://wallpaperaccess.com/full/1282798.jpg');
-
--- Assuming landing_id of 1 was automatically assigned due to AUTO_INCREMENT
-
--- Insert dummy data into tbl_ClinicHours referencing tbl_Landing
-INSERT INTO tbl_ClinicHours (landing_id, avail_day, avail_start_time, avail_end_time)
-VALUES
-(1, 'Monday', '08:00:00', '17:00:00'),
-(1, 'Tuesday', '08:00:00', '17:00:00'),
-(1, 'Wednesday', '08:00:00', '17:00:00'),
-(1, 'Thursday', '08:00:00', '17:00:00'),
-(1, 'Friday', '08:00:00', '17:00:00');
-
-
 
 INSERT INTO `tbl_roles` (`role_id`, `role_name`) VALUES ('1', 'admin'), ('2', 'user')
