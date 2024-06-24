@@ -65,7 +65,7 @@ include_once('header.php');
         <div class="col-12 text-center">
           <section id="sectionService">
             <h1 class="title" style="font-size: 35px; margin-bottom: 50px;">SERVICES OFFERED</h1>
-            <ul id="ourServices" class="list-unstyled" style="font-size: 25px;"> <!-- Adjust font size as needed -->
+            <ul id="our_services" class="list-unstyled" style="font-size: 25px;"> <!-- Adjust font size as needed -->
               <li>Service 1
                 <p>Description of Service 1</p>
               </li>
@@ -92,11 +92,11 @@ include_once('header.php');
   <div style="background-color: white; margin-bottom: 50px; display: flex; height:150px;">
     <div style="background-color: white; width: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
       <h1 style="font-size: 25px; margin: 10px;">Our Schedules</h1>
-      <p id="ourSchedules" style="font-size: 16px; margin: 10px; max-width: 70%;">vice monday 3pm - 4pm | service tuesday 4pm - 5pm | serv wednesday 5pm - 6pm | serv thursday & friday 6am - 9am</p>
+      <p id="our_schedules" style="font-size: 16px; margin: 10px; max-width: 70%;">vice monday 3pm - 4pm | service tuesday 4pm - 5pm | serv wednesday 5pm - 6pm | serv thursday & friday 6am - 9am</p>
     </div>
     <div style="background-color: gray; width: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
       <h1 style="font-size: 25px; margin: 0;">Our Experts</h1>
-      <p id="ourExperts" style="font-size: 16px; margin: 10px;">on god bro</p>
+      <p id="our_experts" style="font-size: 16px; margin: 10px;">on god bro</p>
     </div>
   </div>
 
@@ -160,6 +160,23 @@ include_once('header.php');
           url: '../admin/handles/services/read_services.php',
           success: function(response) {
             console.log("SUCCESS RESPONSE SERVICE", response);
+            $('#our_services').empty();
+            $('#our_schedules').empty();
+            response.data.forEach(function (data) {
+              const read_services_html = `
+              <center><hr style="width: 500px;"></center>
+              <li>${data.service_name}
+                <p style="font-size: 15px;">${data.description}</p>
+              </li>
+              `;
+
+              const read_schedules_html = `
+              ${data.service_name} ${data.concat_date} ${data.concat_time}
+              `;
+
+              $('#our_services').append(read_services_html);
+              $('#our_schedules').append(read_schedules_html);
+            });
           },
           error: function(error) {
             console.log("ERROR LOADING SERVICE", error);
