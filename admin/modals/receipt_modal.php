@@ -129,8 +129,38 @@
 
     // Event listener for printing receipt
     $('#printReceipt').click(function() {
-      window.print();
-    });
+      var printWindow = window.open('', '_blank');
+  var modalContent = $('#mod_Receipt .modal-content').clone(); // Clone the modal content
+
+  // Remove any existing script tags to prevent execution in the print window
+  modalContent.find('script').remove();
+
+  var html = `
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Print Receipt</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="print.css" media="print">
+  </head>
+  <body>
+  ${modalContent[0].outerHTML}
+  <script>
+  window.onload = function() {
+    window.print();
+    // window.close();
+  };
+  <\/script>
+  </body>
+  </html>
+  `;
+
+  printWindow.document.write(html);
+  printWindow.document.close();
+});
+
 
   });
 </script>
