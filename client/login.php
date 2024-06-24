@@ -34,14 +34,15 @@ checkLoggedIn();
                 </div>
               </div>
             </form>
+            <pre></pre>
+            <pre></pre>
+            <p class="text-center">Don't have an account? <a href="register.php">Sign up</a></p>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
-
 
 <script>
   $(document).ready(function() {

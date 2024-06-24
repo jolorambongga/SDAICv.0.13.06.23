@@ -6,6 +6,7 @@ include_once('header.php');
 
 <style>
   /* Add this CSS to your existing stylesheet or a new stylesheet */
+/* Add this CSS to your existing stylesheet or a new stylesheet */
 .dashboard-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -14,19 +15,20 @@ include_once('header.php');
 }
 
 .big-box {
-  background-color: #ffd700; /* Yellow */
+  background-color: #ffd95a; /* Light yellow */
   padding: 20px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 }
 
 .green-box {
-  background-color: #7fff00; /* Green */
+  background-color: #c07f00; /* Dark yellow */
 }
 
 .box {
-  background-color: #ffc0cb; /* Pink */
+  background-color: #4c3d3d; /* Dark brown */
   padding: 20px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  color: #fff; /* Text color for contrast */
 }
 
 .pink-box {
@@ -34,8 +36,10 @@ include_once('header.php');
 }
 
 .lightblue-box {
-  background-color: #add8e6; /* Light Blue */
+  background-color: #fff7d4; /* Light brown */
+  color: #4c3d3d; /* Dark brown text */
 }
+
 
 </style>
 

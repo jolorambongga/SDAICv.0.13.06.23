@@ -66,6 +66,11 @@ checkLoggedIn();
             </div>
             <button type="submit" class="btn btn-mydark float-end">Submit</button>
           </form>
+          <pre></pre>
+          <pre></pre>
+          <pre></pre>
+          <pre></pre>
+          <p class="text-center mt-3">Already have an account? <a href="login.php">Log in</a></p>
         </div>
       </div>
     </div>
