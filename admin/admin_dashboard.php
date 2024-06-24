@@ -4,6 +4,41 @@ $active_dashboard = 'active';
 include_once('header.php');
 ?>
 
+<style>
+  /* Add this CSS to your existing stylesheet or a new stylesheet */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-bottom: 45px;
+}
+
+.big-box {
+  background-color: #ffd700; /* Yellow */
+  padding: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.green-box {
+  background-color: #7fff00; /* Green */
+}
+
+.box {
+  background-color: #ffc0cb; /* Pink */
+  padding: 20px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.pink-box {
+  flex: 1;
+}
+
+.lightblue-box {
+  background-color: #add8e6; /* Light Blue */
+}
+
+</style>
+
 <body>
 
   <div class="my-wrapper">
@@ -16,22 +51,42 @@ include_once('header.php');
     </div>
   </div>
   
-  <div class="container" style="display: grid; grid-template-columns: 1fr 1.7fr 1.7fr; grid-template-rows: auto auto; gap: 20px; margin-bottom: 45px;">
-    <!-- Yellow big box -->
-    <div class="big-box" style="background-color: yellow; padding: 20px; grid-column: 1 / span 2; height: 90%; min-height: 400px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);">
-      skibiddi.
+  <div class="container dashboard-grid">
+    <div class="big-box yellow-box">
+      <!-- Placeholder content -->
+      <h2>Appointment Today</h2>
+      <p>Content for appointment today</p>
     </div>
-    <!-- New big box added here -->
-    <div class="big-box" style="background-color: green; padding: 20px; grid-column: 3; height: 90%; min-height: 400px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);">
-      Toilet.
+    <div class="big-box green-box">
+      <!-- Placeholder content -->
+      <h2>Appointment This Week</h2>
+      <p>Content for appointment this week</p>
     </div>
-    <div style="display: flex; flex-direction: column; gap: 10px; grid-row: 2;">
-        <div class="box" style="background-color: pink; flex: 1; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);">info 1 here</div>
-        <div class="box" style="background-color: pink; flex: 1; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);">info 2 here</div>
-        <div class="box" style="background-color: pink; flex: 2; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);">pie?</div>
+    <div class="box pink-box">
+      <!-- Placeholder content -->
+      <h2>Info 1</h2>
+      <p>Info 1 details here</p>
     </div>
-    <div class="box" style="background-color: lightblue; height: 90%; min-height: 400px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);">graph 1 here</div>
-    <div class="box" style="background-color: lightblue; height: 90%; min-height: 400px; box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);">graph 2 here</div>
+    <div class="box pink-box">
+      <!-- Placeholder content -->
+      <h2>Info 2</h2>
+      <p>Info 2 details here</p>
+    </div>
+    <div class="box pink-box">
+      <!-- Placeholder content -->
+      <h2>Pie Chart</h2>
+      <p>Pie chart or other content</p>
+    </div>
+    <div class="box lightblue-box">
+      <!-- Placeholder content -->
+      <h2>Graph 1</h2>
+      <p>Graph 1 details here</p>
+    </div>
+    <div class="box lightblue-box">
+      <!-- Placeholder content -->
+      <h2>Graph 2</h2>
+      <p>Graph 2 details here</p>
+    </div>
   </div>
 
   <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js'></script>
