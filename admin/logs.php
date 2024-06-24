@@ -67,10 +67,14 @@ include_once('header.php');
             <td>${tae.first_name} ${tae.last_name}</td>
             <td>${tae.category}</td>
             <td>${tae.action}</td>
-            <td>${tae.details}</td>
-            <td>${tae.device}</td>
-            <td>${tae.device_model}</td>
-            <td>${tae.browser}</td>
+            <td>${tae.affected_data}</td>
+            <td>
+            Device: ${tae.device},
+            Model: ${tae.device_model}<br>
+            Browser: ${tae.browser}<br>
+            IP Address: ${tae.ip_address}<br>
+            Location: ${tae.location}
+            </td>
             <td>${tae.time_stamp}</td>
             </tr>
             `;

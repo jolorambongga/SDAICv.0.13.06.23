@@ -20,7 +20,7 @@ try {
                 u.first_name,
                 u.last_name,
                 s.service_name,
-                DATE_FORMAT(CONVERT_TZ(a.appointment_date, '+00:00', '+08:00'), '%M %d, %Y <br> (%W)') as formatted_date,
+                DATE_FORMAT(CONVERT_TZ(a.appointment_date, '+00:00', '+08:00'), '%M %d, %Y (%W)') as formatted_date,
                 TIME_FORMAT(a.appointment_time, '%h:%i %p') as formatted_time,
                 a.notes,
                 a.request_image,
