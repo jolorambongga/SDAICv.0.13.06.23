@@ -119,6 +119,9 @@ include_once "header.php";
         </div>
       </div>
       <!-- end reject modal -->
+      <?php
+        include_once('modals/receipt_modal.php');
+      ?>
       <input type="hidden" id="activeServiceId" value="All">
     </div>
   </div>
@@ -228,15 +231,6 @@ include_once "header.php";
         });
       }
 
-    // Event handler for tab selection
-    // $('#my_nav a').on('click', function(event) {
-    //     event.preventDefault();
-    //     $(this).tab('show');
-    //     var service_id = $('#activeServiceId').val();
-    //     var todayChecked = $('#cbxToday').is(':checked');
-    //     loadFilteredAppointments(service_id, todayChecked);
-    //     console.log('nav link', service_id, todayChecked);
-    // });
 
       loadInitialAppointments();
 
