@@ -139,4 +139,7 @@ CREATE TABLE IF NOT EXISTS tbl_Landing (
 INSERT INTO tbl_Landing (about_us, about_us_image, main_image)
 VALUES ('Welcome to our clinic!', 'https://wallpaperaccess.com/full/1282798.jpg', 'https://wallpaperaccess.com/full/1282798.jpg');
 
+INSERT INTO tbl_Users (username, email, password, role_id, first_name, last_name, contact, address, birthday) 
+VALUES ('joloadmin', 'admin@example.com', '$2y$10$XJh2iR57DlmDuRl3r0XPO.1we2ED/Ly6VxL/L8vUgVdvvH0lNa8i2', 1, 'Admin', 'User', '0000000000', 'Admin Address', '2000-01-01');
+
 INSERT INTO `tbl_roles` (`role_id`, `role_name`) VALUES ('1', 'admin'), ('2', 'user')
