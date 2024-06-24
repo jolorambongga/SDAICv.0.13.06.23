@@ -30,10 +30,8 @@ include_once('header.php');
                 <th scope="col">Name</th>
                 <th scope="col">Category</th>
                 <th scope="col">Action</th>
+                <th scope="col">Affected Data</th>
                 <th scope="col">Details</th>
-                <th scope="col">Device</th>
-                <th scope="col">Device Model</th>
-                <th scope="col">Browser</th>
                 <th scope="col">Timestamp</th>
               </tr>
             </thead>
