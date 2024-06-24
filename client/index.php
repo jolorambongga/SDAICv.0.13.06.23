@@ -101,104 +101,120 @@ include_once('header.php');
     </div>
   </div>
 
-  <script type="text/javascript">
-    $(document).ready(function() {
-      // READ INDEX INFO
-      loadLanding();
-      loadServices();
-      loadDoctors();
+<script type="text/javascript">
+  $(document).ready(function() {
+    // READ INDEX INFO
+    loadLanding();
+    loadServices();
+    loadDoctors();
 
-      function loadLanding() {
-        $.ajax({
-          type: 'GET',
-          dataType: 'JSON',
-          url: 'handles/read_landing.php',
-          success: function(response) {
-            console.log("SUCCESS RESPONSE LANDING", response);
-            if (response.status === 'success' && response.data) {
-              var data = response.data;
+    function loadLanding() {
+      $.ajax({
+        type: 'GET',
+        dataType: 'JSON',
+        url: 'handles/read_landing.php',
+        success: function(response) {
+          console.log("SUCCESS RESPONSE LANDING", response);
+          if (response.status === 'success' && response.data) {
+            var data = response.data;
 
-              // Update background image
-              if (data.background_image) {
-                $('body').css('background-image', 'url(' + data.background_image + ')');
-              }
-
-              // Update about_us content
-              $('#about_us').text(data.about_us);
-
-              // Update about-us image
-              if (data.about_us_image) {
-                var about_us_image_html = '<img src="' + data.about_us_image + '" alt="About Us Image"  style="max-width: 100%; height: auto;">';
-                $('.about-us-image').html(about_us_image_html);
-              }
-
-              // Update clinic hours if available
-              if (data.avail_day && data.avail_start_time && data.avail_end_time) {
-                var clinic_hours_html = '<p>Availability: ' + data.avail_day + ' ' + data.avail_start_time + ' - ' + data.avail_end_time + '</p>';
-                $('#clinic_hours').html(clinic_hours_html);
-              }
-            } else {
-              // Handle empty or error response
-              $('#about_us').text('No data available.');
-              $('.about-us-image').empty(); // Clear about-us image if no data
-              $('#clinic_hours').empty(); // Clear clinic hours if no data
+            // Update background image
+            if (data.background_image) {
+              $('body').css('background-image', 'url(' + data.background_image + ')');
             }
-          },
-          error: function(error) {
-            console.log("ERROR LOADING LANDING", error);
-          }
-        });
-      }
 
-      function loadServices() {
-        $.ajax({
-          type: 'GET',
-          dataType: 'JSON',
-          url: '../admin/handles/services/read_services.php',
-          success: function(response) {
-            console.log("SUCCESS RESPONSE SERVICE", response);
-            $('#our_services').empty();
-            $('#our_schedules').empty();
-            response.data.forEach(function(data) {
-              const read_services_html = `
-              <li>${data.service_name}
-                <p>${data.description}</p>
-              </li>
-              `;
-              $('#our_services').append(read_services_html);
+            // Update about_us content
+            $('#about_us').text(data.about_us);
 
-              const read_schedules_html = `
-              <div>
-                <strong>${data.service_name}</strong><br>
-                <span>${data.concat_date}</span><br>
-                <span>${data.concat_time}</span>
-                <hr>
-              </div>
-              `;
-              $('#our_schedules').append(read_schedules_html);
-            });
-          },
-          error: function(error) {
-            console.log("ERROR LOADING SERVICE", error);
-          }
-        });
-      }
+            // Update about-us image
+            if (data.about_us_image) {
+              var about_us_image_html = '<img src="' + data.about_us_image + '" alt="About Us Image"  style="max-width: 100%; height: auto;">';
+              $('.about-us-image').html(about_us_image_html);
+            }
 
-      function loadDoctors() {
-        $.ajax({
-          type: 'GET',
-          dataType: 'JSON',
-          url: '../admin/handles/doctors/read_doctors.php',
-          success: function(response) {
-            console.log("SUCCESS RESPONSE DOCTORS", response);
-          },
-          error: function(error) {
-            console.log("ERROR LOADING DOCTORS", error);
+            // Update clinic hours if available
+            if (data.avail_day && data.avail_start_time && data.avail_end_time) {
+              var clinic_hours_html = '<p>Availability: ' + data.avail_day + ' ' + data.avail_start_time + ' - ' + data.avail_end_time + '</p>';
+              $('#clinic_hours').html(clinic_hours_html);
+            }
+          } else {
+            // Handle empty or error response
+            $('#about_us').text('No data available.');
+            $('.about-us-image').empty(); // Clear about-us image if no data
+            $('#clinic_hours').empty(); // Clear clinic hours if no data
           }
+        },
+        error: function(error) {
+          console.log("ERROR LOADING LANDING", error);
+        }
+      });
+    }
+
+    function loadServices() {
+  $.ajax({
+    type: 'GET',
+    dataType: 'JSON',
+    url: '../admin/handles/services/read_services.php',
+    success: function(response) {
+      console.log("SUCCESS RESPONSE SERVICE", response);
+      $('#our_services').empty();
+      $('#our_schedules').empty();
+      response.data.forEach(function(data) {
+        const read_services_html = `
+        <center><hr style="width: 250px;"></center>
+        <li>${data.service_name}
+          <p style="font-size: 15px;">${data.description}</p>
+        </li>
+        `;
+        $('#our_services').append(read_services_html);
+
+        // Split dates and times
+        const dates = data.concat_date.split(',');
+        const times = data.concat_time.split(',');
+
+        let scheduleHtml = `<hr><div><strong>${data.service_name}</strong><br>`;
+        dates.forEach((date, index) => {
+          const time = times[index];
+          scheduleHtml += `<span>${date} (${time})</span><br>`;
         });
-      }
-    });
-  </script>
+        scheduleHtml += `</div>`;
+
+        $('#our_schedules').append(scheduleHtml);
+      });
+    },
+    error: function(error) {
+      console.log("ERROR LOADING SERVICE", error);
+    }
+  });
+
+
+    }
+
+    function loadDoctors() {
+      $.ajax({
+        type: 'GET',
+        dataType: 'JSON',
+        url: '../admin/handles/doctors/read_doctors.php',
+        success: function(response) {
+          console.log("SUCCESS RESPONSE DOCTORS", response);
+          $('#our_experts').empty();
+
+          response.data_doctor.forEach(function (data){
+            const read_experts_html = `
+            <hr>
+            ${data.first_name} ${data.last_name}
+            `;
+
+            $('#our_experts').append(read_experts_html);
+          });
+        },
+        error: function(error) {
+          console.log("ERROR LOADING DOCTORS", error);
+        }
+      });
+    }
+  });
+</script>
 
   <?php
   include_once('footer.php');
