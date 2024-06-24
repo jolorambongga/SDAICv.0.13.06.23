@@ -23,7 +23,7 @@
 						var action = "LOG OUT";
 						var affected_data = "NONEsss";
 						logAction(user_id, category, action, affected_data);
-						window.location.href='index.php';
+						window.location.href = response.redirect_user;
 					} else {
 						console.error("Logout failed:", response.message);
 					}

@@ -1,4 +1,5 @@
 <?php date_default_timezone_set('Asia/Manila'); ?>
+<?php include_once('admin_auth.php')?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +12,8 @@
 
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-	
+	<script src="https://cdn.jsdelivr.net/npm/bowser"></script>
+	<script src="script/log_script.js"></script>	
 </head>
 
 <body>
@@ -101,9 +103,38 @@
 			</div>
 			<div class="col-md-2 d-flex justify-content-end" style="background-color: #C07F00;">
 				<!-- IF SET CONDITION FOR BUTTONS -->
-				<button type="button" class="btn btn-mydark me-2 mt-2 mb-2">Log-Out</button>
+				<button id="btnLogout" type="button" class="btn btn-mydark me-2 mt-2 mb-2">Log-Out</button>
 			</div>
 		</div>
 	</div>
 
 	<!-- end header -->
+
+	<script>
+		$(document).ready(function () {
+			$(document).on('click', '#btnLogout', function () {
+				$.ajax({
+					type: "GET",
+					url: "../client/handles/logout_endpoint.php",
+					dataType: 'JSON',
+					success: function(response) {
+						console.log("LOGOUT RESPONSE", response);
+						if(response.status === "success") {
+							var user_id = <?php echo isset($_SESSION['user_id']) ? json_encode($_SESSION['user_id']) : 'null'; ?>;
+							var category = "ADMIN";
+							var action = "LOG OUT";
+							var affected_data = "WALA NAMAN";
+							logAction(user_id, category, action, affected_data);
+							window.location.href = response.redirect_admin;
+						} else {
+							console.error("Logout failed:", response.message);
+						}
+					},
+					error: function(error) {
+						console.log("LOGOUT ERROR", error);
+						alert("ERROR TRYING TO LOGOUT!");
+					}
+				});
+			});
+		});
+	</script>

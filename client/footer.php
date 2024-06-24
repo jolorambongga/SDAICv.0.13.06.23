@@ -67,7 +67,7 @@
 						var action = "LOG OUT FOOTER ONLY";
 						var affected_data = "NONE";
 						logAction(user_id, category, action, affected_data);
-						window.location.href='index.php';
+						window.location.href = response.redirect_user;
 					} else {
 						console.error("Logout failed:", response.message);
 					}
