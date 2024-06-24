@@ -43,7 +43,7 @@ try {
                     "message" => "Admin login successful. Welcome, " . $user['first_name'] . " " . $user['last_name'],
                     "status" => "success",
                     "data" => $user,
-                    "redirect" => "admin_dashboard.php"
+                    "redirect" => "../admin/admin_dashboard.php"
                 ));
             } else {
                 // User role
@@ -51,7 +51,7 @@ try {
                     "message" => "User login successful. Welcome, " . $user['first_name'] . " " . $user['last_name'],
                     "status" => "success",
                     "data" => $user,
-                    "redirect" => "user_dashboard.php"
+                    "redirect" => "new_appointment.php"
                 ));
             }
         } else {
