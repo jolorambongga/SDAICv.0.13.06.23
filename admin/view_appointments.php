@@ -206,11 +206,14 @@ include_once "header.php";
               </td>
               <td data-appointment-id='${data.appointment_id}' data-full-name="${data.first_name} ${data.last_name}" data-appointment-name="${data.service_name}">
               <div class="d-grid gap-2 d-md-flex justify-content-md-end text-center">
-              <button id='callReject' data-bs-toggle="modal" data-bs-target="#mod_Reject" type='button' class='btn btn-danger btn-sm'>
+              <button id='callReject' data-bs-toggle="modal" data-bs-target="#mod_Reject" type='button' class='btn btn-mymedium btn-sm'>
               <i class="fas fa-thumbs-down"></i>
               </button>
-              <button id='callApprove' data-bs-toggle="modal" data-bs-target="#mod_Approve" type='button' class='btn btn-success btn-sm'>
+              <button id='callApprove' data-bs-toggle="modal" data-bs-target="#mod_Approve" type='button' class='btn btn-myshadow btn-sm'>
               <i class="fas fa-thumbs-up"></i>
+              </button>
+              <button id='callReceipt' data-bs-toggle="modal" data-bs-target="#mod_Receipt" type='button' class='btn btn-mydark btn-sm'>
+              <i class="fas fa-receipt"></i>
               </button>
               </div>
               </td>
