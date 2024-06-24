@@ -17,7 +17,6 @@ include_once('header.php');
             <img src="https://www.logolynx.com/images/logolynx/2a/2ad00c896e94f1f42c33c5a71090ad5e.png" alt="Logo" width="150" height="auto" class="d-inline-block align-text-top mr-2" style="margin-bottom: 30px;">
             <div class="brand-text" style="font-size: 45px; color: white; font-weight: bold; line-height: 1; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);">STA. MARIA DIAGNOSTIC</div>
             <div class="brand-text" style="font-size: 45px; color: white; font-weight: bold; line-height: 1; text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);">AND IMAGING CENTER</div>
-
           </a>
         </div>
       </div>
@@ -54,10 +53,6 @@ include_once('header.php');
     </div>
   </div>
 
-
-
-
-
   <!-- end nav bar -->
   <div class="my-wrapper" style="margin-bottom: 50px; margin-top: 50px;">
     <div class="container-fluid">
@@ -88,68 +83,70 @@ include_once('header.php');
     </div>
   </div>
 
-
-  <div style="background-color: white; margin-bottom: 50px; display: flex; height:150px;">
-    <div style="background-color: white; width: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-      <h1 style="font-size: 25px; margin: 10px;">Our Schedules</h1>
-      <p id="our_schedules" style="font-size: 16px; margin: 10px; max-width: 70%;">vice monday 3pm - 4pm | service tuesday 4pm - 5pm | serv wednesday 5pm - 6pm | serv thursday & friday 6am - 9am</p>
-    </div>
-    <div style="background-color: gray; width: 50%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-      <h1 style="font-size: 25px; margin: 0;">Our Experts</h1>
-      <p id="our_experts" style="font-size: 16px; margin: 10px;">on god bro</p>
+  <!-- Responsive Container for Our Schedules and Our Experts -->
+  <div class="container-fluid" style="margin-bottom: 50px;">
+    <div class="row">
+      <div class="col-md-6 mb-3">
+        <div class="p-4 text-center bg-white border h-100">
+          <h1 style="font-size: 25px; margin: 10px;">Our Schedules</h1>
+          <p id="our_schedules" style="font-size: 16px; margin: 10px;">vice monday 3pm - 4pm | service tuesday 4pm - 5pm | serv wednesday 5pm - 6pm | serv thursday & friday 6am - 9am</p>
+        </div>
+      </div>
+      <div class="col-md-6 mb-3">
+        <div class="p-4 text-center bg-gray border h-100">
+          <h1 style="font-size: 25px; margin: 10px;">Our Experts</h1>
+          <p id="our_experts" style="font-size: 16px; margin: 10px;">on god bro</p>
+        </div>
+      </div>
     </div>
   </div>
 
-
-
-
   <script type="text/javascript">
     $(document).ready(function() {
-// READ INDEX INFO
+      // READ INDEX INFO
       loadLanding();
       loadServices();
       loadDoctors();
 
-
       function loadLanding() {
         $.ajax({
-            type: 'GET',
-            dataType: 'JSON',
-            url: 'handles/read_landing.php',
-            success: function(response) {
-                console.log("SUCCESS RESPONSE LANDING", response);
-                if (response.status === 'success' && response.data) {
-                    var data = response.data;
+          type: 'GET',
+          dataType: 'JSON',
+          url: 'handles/read_landing.php',
+          success: function(response) {
+            console.log("SUCCESS RESPONSE LANDING", response);
+            if (response.status === 'success' && response.data) {
+              var data = response.data;
 
-                    // Update background image
-                    if (data.background_image) {
-                        $('body').css('background-image', 'url(' + data.background_image + ')');
-                    }
+              // Update background image
+              if (data.background_image) {
+                $('body').css('background-image', 'url(' + data.background_image + ')');
+              }
 
-                    // Update about_us content
-                    $('#about_us').text(data.about_us);
+              // Update about_us content
+              $('#about_us').text(data.about_us);
 
-                    // Update about-us image
-                    if (data.about_us_image) {
-                        var about_us_image_html = '<img src="' + data.about_us_image + '" alt="About Us Image"  style="max-width: 100%; height: auto;">';
-                        $('.about-us-image').html(about_us_image_html);
-                    }
+              // Update about-us image
+              if (data.about_us_image) {
+                var about_us_image_html = '<img src="' + data.about_us_image + '" alt="About Us Image"  style="max-width: 100%; height: auto;">';
+                $('.about-us-image').html(about_us_image_html);
+              }
 
-                    // Update clinic hours if available
-                    if (data.avail_day && data.avail_start_time && data.avail_end_time) {
-                        var clinic_hours_html = '<p>Availability: ' + data.avail_day + ' ' + data.avail_start_time + ' - ' + data.avail_end_time + '</p>';
-                        $('#clinic_hours').html(clinic_hours_html);
-                    }
-                } else {
-                    // Handle empty or error response
-                    $('#about_us').text('No data available.');
-                    $('.about-us-image').empty(); // Clear about-us image if no data
-                    $('#clinic_hours').empty(); // Clear clinic hours if no data
-                }
-            },
-            error: function(error) {
-                console.log("ERROR LOADING LANDING", error);
+              // Update clinic hours if available
+              if (data.avail_day && data.avail_start_time && data.avail_end_time) {
+                var clinic_hours_html = '<p>Availability: ' + data.avail_day + ' ' + data.avail_start_time + ' - ' + data.avail_end_time + '</p>';
+                $('#clinic_hours').html(clinic_hours_html);
+              }
+            } else {
+              // Handle empty or error response
+              $('#about_us').text('No data available.');
+              $('.about-us-image').empty(); // Clear about-us image if no data
+              $('#clinic_hours').empty(); // Clear clinic hours if no data
             }
+          },
+          error: function(error) {
+            console.log("ERROR LOADING LANDING", error);
+          }
         });
       }
 
@@ -162,19 +159,22 @@ include_once('header.php');
             console.log("SUCCESS RESPONSE SERVICE", response);
             $('#our_services').empty();
             $('#our_schedules').empty();
-            response.data.forEach(function (data) {
+            response.data.forEach(function(data) {
               const read_services_html = `
-              <center><hr style="width: 500px;"></center>
               <li>${data.service_name}
-                <p style="font-size: 15px;">${data.description}</p>
+                <p>${data.description}</p>
               </li>
               `;
+              $('#our_services').append(read_services_html);
 
               const read_schedules_html = `
-              ${data.service_name} ${data.concat_date} ${data.concat_time}
+              <div>
+                <strong>${data.service_name}</strong><br>
+                <span>${data.concat_date}</span><br>
+                <span>${data.concat_time}</span>
+                <hr>
+              </div>
               `;
-
-              $('#our_services').append(read_services_html);
               $('#our_schedules').append(read_schedules_html);
             });
           },
@@ -183,6 +183,7 @@ include_once('header.php');
           }
         });
       }
+
       function loadDoctors() {
         $.ajax({
           type: 'GET',
@@ -199,12 +200,6 @@ include_once('header.php');
     });
   </script>
 
-
-
-
-
-
-
   <?php
   include_once('footer.php');
-?>  
+?>
